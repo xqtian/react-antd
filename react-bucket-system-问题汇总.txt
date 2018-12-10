@@ -1,0 +1,44 @@
+1, input的blur事件和onClick事件冲突 ？
+    <1>,onblur延迟执行；setTimeout()
+
+    <2>,onClick改为onMouseDown
+    https://blog.csdn.net/zhouziyu2011/article/details/53942285
+
+2,webpack文件运行打开目录（没报错）,没渲染页面？
+    webpack配置入口文件webpack-config.js
+
+3, 路由从首页跳转其他页面正常，浏览器刷新当前页面报错，找不到 ？
+    使用HashRouter 
+    https://blog.csdn.net/weixin_39168678/article/details/79756305
+
+4,路由跳转？
+    <1>, 页面引入 createHistory
+        import createHistory from 'history/createHashHistory';
+        const history = createHistory();
+        history.push('/user/list');
+
+    <2>，页面引入 PropTypes
+        import PropTypes from "prop-types";
+        组件内设置路由
+        static contextTypes = {
+            router: PropTypes.object.isRequired
+        };
+        this.context.router.history.push('/user/list');
+
+5,报错 Warning: Hash history cannot PUSH the same path; a new entry will not be added to the history stack ?
+      <Link to={{pathname: "/book/add"}} replace>添加图书</Link>
+      在Link标签里添加 replace
+      http://www.cnblogs.com/ostrich-sunshine/p/9770774.html
+
+6,报错 You should not use <Route component> and <Route children> in the same route; <Route children> will be ignored ？
+
+    组件引入，不要用路由形式
+
+7,  <Route path="/" component={HomePage} />
+    <Route path="/user/list" component={UserListPage} />
+    如果匹配路由path='/page'，那么会把Home也会展示出来？
+
+    在入口路由加上exact
+    <Route exact path="/" component={HomePage} />
+
+    用户名： admin  密码：123456
